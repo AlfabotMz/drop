@@ -22,56 +22,55 @@ export default function LandingPage() {
 
       <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         {/* Hero Section */}
-        <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-bold mb-4">
-            <Star className="fill-yellow-500 border-none" size={16} />
+        <header className="text-center mb-6">
+          <div className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold mb-2">
+            <Star className="fill-yellow-500 border-none" size={14} />
             <span>{product.rating.value} ({product.rating.count} avaliações)</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter leading-tight uppercase">
+          <h1 className="text-3xl md:text-5xl font-black mb-2 tracking-tighter leading-tight uppercase">
             {product.name}
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-green-600 uppercase tracking-widest mb-8">
+          <p className="text-lg md:text-xl font-bold text-green-600 uppercase tracking-widest mb-4">
             {product.tagline}
           </p>
 
           {/* Main Image Display */}
-          <div className="relative w-full overflow-hidden rounded-3xl mb-8 shadow-2xl border-4 border-white">
+          <div className="relative w-full max-w-sm mx-auto overflow-hidden rounded-2xl mb-4 shadow-xl border-2 border-white">
             <img
               src="/images/pe6.png"
               alt={product.name}
               className="w-full aspect-square object-cover transition-transform duration-700 hover:scale-105"
             />
-            <div className="absolute top-4 left-4 glass px-4 py-2 rounded-full flex items-center gap-2">
-              <Truck size={18} className="text-green-600" />
-              <span className="text-xs font-black uppercase tracking-widest">Pague na Entrega</span>
+            <div className="absolute top-2 left-2 glass px-3 py-1 rounded-full flex items-center gap-2">
+              <Truck size={14} className="text-green-600" />
+              <span className="text-[10px] font-black uppercase tracking-widest">Pague na Entrega</span>
             </div>
           </div>
 
-          <div className="bg-red-50 border-2 border-dashed border-red-500 rounded-3xl p-6 mb-8 text-center animate-shimmer">
-            <h3 className="text-red-700 font-black uppercase tracking-tighter text-xl mb-1">PROMOÇÃO LIMITADA</h3>
-            <p className="text-red-500 font-bold text-[10px] uppercase tracking-widest mb-4">Válido apenas para as próximas 6 unidades em stock</p>
-            <div className="flex justify-center gap-8">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Unidade</span>
-                <span className="text-gray-400 line-through font-bold">4000 Mt</span>
-                <span className="text-2xl font-black text-red-600">3699 Mt</span>
+          <div className="bg-red-50 border border-dashed border-red-500 rounded-2xl p-4 mb-6 shadow-sm">
+            <h3 className="text-red-700 font-bold uppercase tracking-widest text-sm mb-2">PROMOÇÃO LIMITADA</h3>
+            <div className="flex justify-center items-center gap-6">
+              <div className="flex flex-col items-center">
+                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Unidade</span>
+                <span className="text-gray-400 line-through font-bold text-xs">4000 Mt</span>
+                <span className="text-xl font-black text-red-600">3699 Mt</span>
               </div>
-              <div className="w-px bg-red-200" />
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1 text-green-600">Duas Unidades</span>
-                <span className="text-gray-400 line-through font-bold">8000 Mt</span>
-                <span className="text-2xl font-black text-green-600">6500 Mt</span>
+              <div className="h-8 w-px bg-red-200" />
+              <div className="flex flex-col items-center">
+                <span className="text-[9px] font-black text-green-600 uppercase tracking-widest leading-none mb-1">Duas Unidades</span>
+                <span className="text-gray-400 line-through font-bold text-xs">8000 Mt</span>
+                <span className="text-xl font-black text-green-600">6500 Mt</span>
               </div>
             </div>
           </div>
 
           <a
             href="#checkout"
-            className="inline-flex flex-col items-center gap-1 bg-green-600 text-white px-12 py-6 rounded-2xl shadow-2xl hover:bg-green-700 transition-all transform hover:-translate-y-1 active:translate-y-0 group"
+            className="w-full md:w-auto inline-flex flex-col items-center gap-1 bg-green-600 text-white px-10 py-4 rounded-xl shadow-xl hover:bg-green-700 transition-all transform hover:-translate-y-1 active:translate-y-0 group"
           >
-            <span className="text-2xl font-black uppercase tracking-tighter">ENCOMENDE AGORA</span>
-            <span className="text-sm font-bold opacity-80 uppercase tracking-widest flex items-center gap-2">
-              IRA PAGAR NO MOMENTO DA ENTREGA
+            <span className="text-xl font-black uppercase tracking-tighter">ENCOMENDE AGORA</span>
+            <span className="text-[10px] font-bold opacity-80 uppercase tracking-widest flex items-center gap-2">
+              PAGUE AO RECEBER • SEGURO
             </span>
           </a>
         </header>
