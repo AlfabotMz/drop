@@ -28,8 +28,11 @@ export default function CheckoutForm() {
         // Validação de números de telefone (9 dígitos cada)
         const invalidPhones = formData.phones.filter(p => p.trim().length !== 9);
         if (invalidPhones.length > 0) {
+            alert("Por favor, verifique os números de telefone. Devem ter 9 dígitos.");
             return;
         }
+
+        console.log('Submitting form data...', formData);
 
         setIsSubmitting(true);
         try {
@@ -46,6 +49,7 @@ export default function CheckoutForm() {
             });
 
             if (response.ok) {
+                console.log('Order submitted successfully, preparing WhatsApp redirect...');
                 // Construir mensagem para WhatsApp
                 const phoneList = formData.phones.filter(p => p.trim() !== '').join(', ');
                 const message = `*NOVA ENCOMENDA - ${PRODUCT_DATA.product.name}*\n\n` +
@@ -63,17 +67,16 @@ export default function CheckoutForm() {
 
                 setIsSuccess(true);
 
-                // Redirecionar após um pequeno delay para mostrar o estado de sucesso se necessário, 
-                // ou redirecionar imediatamente.
-                setTimeout(() => {
-                    window.location.href = whatsappUrl;
-                }, 1000);
+                // Redirecionar
+                window.location.href = whatsappUrl;
             } else {
-                alert("Erro ao enviar pedido. Tente novamente.");
+                const errorData = await response.json().catch(() => ({}));
+                console.error('Submission failed:', errorData);
+                alert(`Erro ao enviar pedido: ${errorData.details || 'Tente novamente.'}`);
             }
         } catch (error) {
-            console.error(error);
-            alert("Erro de conexão.");
+            console.error('Connection error:', error);
+            alert("Erro de conexão. Verifique sua internet.");
         } finally {
             setIsSubmitting(false);
         }

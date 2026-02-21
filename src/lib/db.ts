@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { tmpdir } from 'os';
 
-const DB_PATH = path.resolve('/tmp', 'orders.json');
+const DB_PATH = path.join(tmpdir(), 'orders.json');
 
 interface Order {
   id: number;
@@ -23,6 +24,10 @@ class JsonDatabase {
   }
 
   init() {
+    const dir = path.dirname(DB_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     if (!fs.existsSync(DB_PATH)) {
       fs.writeFileSync(DB_PATH, JSON.stringify([], null, 2));
     }
