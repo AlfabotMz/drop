@@ -9,8 +9,8 @@ export const PRODUCT_DATA = {
     top_alerts: {
         type: "repeating_banner",
         content: {
-            headline: "🚚 PROMOÇÃO CHAVA24: PAGUE SÓ AO RECEBER",
-            subheadline: "OFERTA VÁLIDA PARA MAPUTO E MATOLA - ECONOMIZE HOJE"
+            headline: "⚠️ PROMOÇÃO VÁLIDA PARA AS PRÓXIMAS 6 UNIDADES",
+            subheadline: "ECONOMIZE HOJE COM A CHAVA24 - PAGUE AO RECEBER"
         }
     },
     product: {

@@ -6,8 +6,8 @@ import { PRODUCT_DATA } from '@/lib/constants';
 export default function CheckoutForm() {
     const [formData, setFormData] = useState({
         full_name: '',
-        phone: '',
-        province: '',
+        phones: [''],
+        province: 'Maputo',
         delivery_location: '',
         delivery_priority: 'Hoje',
         agreed: false
@@ -25,6 +25,12 @@ export default function CheckoutForm() {
             return;
         }
 
+        // Validação de números de telefone (9 dígitos cada)
+        const invalidPhones = formData.phones.filter(p => p.trim().length !== 9);
+        if (invalidPhones.length > 0) {
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const response = await fetch('/api/orders', {
@@ -32,6 +38,7 @@ export default function CheckoutForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     ...formData,
+                    phone: formData.phones.filter(p => p.trim() !== '').join(', '),
                     total_price: activeOffer.current_price,
                     product_id: PRODUCT_DATA.product.id,
                     quantity: selectedOfferIndex === 0 ? 1 : 2
@@ -133,28 +140,74 @@ export default function CheckoutForm() {
                     />
                 </div>
 
-                <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-1 uppercase tracking-wider">Contacto *</label>
-                    <input
-                        required
-                        type="tel"
-                        className="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all"
-                        placeholder="NÚMERO PARA CHAMADAS"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
+                <div className="space-y-3">
+                    <label className="block text-sm font-bold text-gray-700 mb-1 uppercase tracking-wider">Contacto (Pode adicionar mais de 1) *</label>
+                    {formData.phones.map((phone, index) => (
+                        <div key={index} className="flex gap-2">
+                            <div className="relative flex-1">
+                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">+258</span>
+                                <input
+                                    required
+                                    type="tel"
+                                    maxLength={9}
+                                    className={`w-full p-4 pl-16 border-2 rounded-xl focus:ring-4 outline-none transition-all font-bold ${phone.length > 0 && phone.length !== 9
+                                        ? 'border-red-500 focus:border-red-600 focus:ring-red-100 bg-red-50'
+                                        : 'border-gray-300 focus:border-green-500 focus:ring-green-100'
+                                        }`}
+                                    placeholder="8XXXXXXX"
+                                    value={phone}
+                                    onChange={(e) => {
+                                        const newPhones = [...formData.phones];
+                                        const val = e.target.value.replace(/\D/g, '');
+                                        if (val.length <= 9) {
+                                            newPhones[index] = val;
+                                            setFormData({ ...formData, phones: newPhones });
+                                        }
+                                    }}
+                                />
+                                {phone.length > 0 && phone.length !== 9 && (
+                                    <span className="text-[10px] text-red-500 font-black uppercase tracking-widest mt-1 block">
+                                        Faltam {9 - phone.length} dígitos
+                                    </span>
+                                )}
+                            </div>
+                            {formData.phones.length > 1 && (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const newPhones = formData.phones.filter((_, i) => i !== index);
+                                        setFormData({ ...formData, phones: newPhones });
+                                    }}
+                                    className="bg-red-50 text-red-500 p-4 rounded-xl border-2 border-red-100 hover:bg-red-100 transition-colors"
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, phones: [...formData.phones, ''] })}
+                        className="text-xs font-black text-green-600 uppercase tracking-widest hover:underline flex items-center gap-1"
+                    >
+                        + Adicionar outro número
+                    </button>
                 </div>
 
                 <div>
                     <label className="block text-sm font-bold text-gray-700 mb-1 uppercase tracking-wider">Província *</label>
-                    <input
+                    <select
                         required
-                        type="text"
-                        className="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all"
-                        placeholder="DIGITE SUA PROVINCIA"
+                        className="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all font-bold bg-white"
                         value={formData.province}
                         onChange={(e) => setFormData({ ...formData, province: e.target.value })}
-                    />
+                    >
+                        {[
+                            'Maputo', 'Gaza'
+                        ].map(p => (
+                            <option key={p} value={p}>{p}</option>
+                        ))}
+                    </select>
                 </div>
 
                 <div>
@@ -173,8 +226,8 @@ export default function CheckoutForm() {
                     <p className="text-red-700 font-bold text-xs uppercase mb-3">
                         SELECIONE QUANDO DESEJA RECEBER A SUA ENCOMENDA
                     </p>
-                    <div className="flex gap-4 justify-center">
-                        {['Hoje', 'Amanhã'].map((option) => (
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        {['Hoje', 'Amanhã', 'Nesta Semana'].map((option) => (
                             <label key={option} className="flex items-center gap-2 cursor-pointer group">
                                 <input
                                     type="radio"

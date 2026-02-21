@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Package, Phone, MapPin, Calendar, Clock, MozIcon } from 'lucide-react';
+import { Package, Phone, MapPin, Calendar, Clock } from 'lucide-react';
 
 interface Order {
     id: number;
@@ -98,14 +98,20 @@ export default function OrdersPage() {
                                             <div className="bg-green-100 p-2 rounded-xl text-green-600"><Phone size={20} /></div>
                                             <div>
                                                 <span className="block text-[10px] font-black uppercase tracking-widest text-gray-400">CONTACTO</span>
-                                                <span className="font-bold text-lg">{order.phone}</span>
-                                                <a
-                                                    href={`https://wa.me/258${order.phone}`}
-                                                    target="_blank"
-                                                    className="block text-xs text-green-600 font-bold hover:underline"
-                                                >
-                                                    Chamar no WhatsApp
-                                                </a>
+                                                <div className="flex flex-col gap-1">
+                                                    {order.phone.split(',').map((num, i) => (
+                                                        <div key={i}>
+                                                            <span className="font-bold text-lg">{num.trim()}</span>
+                                                            <a
+                                                                href={`https://wa.me/258${num.trim().replace(/\s/g, '')}`}
+                                                                target="_blank"
+                                                                className="block text-xs text-green-600 font-bold hover:underline"
+                                                            >
+                                                                Chamar no WhatsApp
+                                                            </a>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

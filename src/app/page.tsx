@@ -48,7 +48,8 @@ export default function LandingPage() {
           </div>
 
           <div className="bg-red-50 border-2 border-dashed border-red-500 rounded-3xl p-6 mb-8 text-center animate-shimmer">
-            <h3 className="text-red-700 font-black uppercase tracking-tighter text-xl mb-2">PROMOÇÃO LIMITADA</h3>
+            <h3 className="text-red-700 font-black uppercase tracking-tighter text-xl mb-1">PROMOÇÃO LIMITADA</h3>
+            <p className="text-red-500 font-bold text-[10px] uppercase tracking-widest mb-4">Válido apenas para as próximas 6 unidades em stock</p>
             <div className="flex justify-center gap-8">
               <div className="flex flex-col">
                 <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Unidade</span>
