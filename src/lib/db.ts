@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const DB_PATH = path.resolve(process.cwd(), 'orders.json');
+const DB_PATH = path.resolve('/tmp', 'orders.json');
 
 interface Order {
   id: number;

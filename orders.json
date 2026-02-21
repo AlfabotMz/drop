@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": 1771712289874,
+    "full_name": "jhd",
+    "phone": "982232324",
+    "province": "Maputo",
+    "delivery_location": "r2rr",
+    "delivery_priority": "Hoje",
+    "total_price": 3699,
+    "product_id": "panela-electrica-4l",
+    "quantity": 1,
+    "status": "pending",
+    "created_at": "2026-02-21T22:18:09.874Z"
+  }
+]

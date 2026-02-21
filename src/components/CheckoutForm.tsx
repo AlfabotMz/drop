@@ -46,7 +46,28 @@ export default function CheckoutForm() {
             });
 
             if (response.ok) {
+                // Construir mensagem para WhatsApp
+                const phoneList = formData.phones.filter(p => p.trim() !== '').join(', ');
+                const message = `*NOVA ENCOMENDA - ${PRODUCT_DATA.product.name}*\n\n` +
+                    `*Cliente:* ${formData.full_name}\n` +
+                    `*Contacto:* ${phoneList}\n` +
+                    `*Província:* ${formData.province}\n` +
+                    `*Local:* ${formData.delivery_location}\n` +
+                    `*Entrega:* ${formData.delivery_priority}\n\n` +
+                    `*Produto:* ${PRODUCT_DATA.product.name} (${selectedOfferIndex === 0 ? '01 Unidade' : '02 Unidades'})\n` +
+                    `*Total:* ${activeOffer.current_price} Mt\n\n` +
+                    `_Enviado via CHAVA24_`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/258872204494?text=${encodedMessage}`;
+
                 setIsSuccess(true);
+
+                // Redirecionar após um pequeno delay para mostrar o estado de sucesso se necessário, 
+                // ou redirecionar imediatamente.
+                setTimeout(() => {
+                    window.location.href = whatsappUrl;
+                }, 1000);
             } else {
                 alert("Erro ao enviar pedido. Tente novamente.");
             }
