@@ -22,6 +22,8 @@ export async function POST(request: Request) {
       );
     }
 
+    console.log('Order Body:', body);
+
     const stmt = db.prepare(`
       INSERT INTO orders (full_name, phone, province, delivery_location, delivery_priority, total_price, product_id, quantity)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -38,14 +40,19 @@ export async function POST(request: Request) {
       quantity
     );
 
+    console.log('Order Result:', result);
+
     return NextResponse.json({
       success: true,
       orderId: result.lastInsertRowid
     });
   } catch (error) {
-    console.error('Order Submission Error:', error);
+    console.error('SERVER Order Submission Error OBJECT:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      {
+        error: 'Internal Server Error',
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     );
   }

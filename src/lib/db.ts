@@ -39,26 +39,39 @@ class JsonDatabase {
 
     return {
       run: (...params: any[]) => {
-        if (isInsert) {
-          const data: Order[] = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
-          const newOrder: Order = {
-            id: Date.now(),
-            full_name: params[0],
-            phone: params[1],
-            province: params[2],
-            delivery_location: params[3],
-            delivery_priority: params[4],
-            total_price: params[5],
-            product_id: params[6],
-            quantity: params[7],
-            status: 'pending',
-            created_at: new Date().toISOString()
-          };
-          data.push(newOrder);
-          fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
-          return { lastInsertRowid: newOrder.id };
+        try {
+          if (isInsert) {
+            console.log('Inserting into JSON DB with params:', params);
+            if (!fs.existsSync(DB_PATH)) {
+              console.log('DB file missing, creating it');
+              fs.writeFileSync(DB_PATH, JSON.stringify([], null, 2));
+            }
+            const fileContent = fs.readFileSync(DB_PATH, 'utf8');
+            console.log('Current DB Content length:', fileContent.length);
+            const data: Order[] = JSON.parse(fileContent);
+            const newOrder: Order = {
+              id: Date.now(),
+              full_name: params[0],
+              phone: params[1],
+              province: params[2],
+              delivery_location: params[3],
+              delivery_priority: params[4],
+              total_price: params[5],
+              product_id: params[6],
+              quantity: params[7],
+              status: 'pending',
+              created_at: new Date().toISOString()
+            };
+            data.push(newOrder);
+            fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+            console.log('Successfully wrote to DB, new order ID:', newOrder.id);
+            return { lastInsertRowid: newOrder.id };
+          }
+          return { lastInsertRowid: 0 };
+        } catch (err) {
+          console.error('Error in JsonDatabase.run:', err);
+          throw err;
         }
-        return { lastInsertRowid: 0 };
       },
       all: (): Order[] => {
         if (isSelect) {
