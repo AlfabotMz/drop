@@ -35,51 +35,28 @@ export default function CheckoutForm() {
         console.log('Submitting form data...', formData);
 
         setIsSubmitting(true);
-        try {
-            const response = await fetch('/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    ...formData,
-                    phone: formData.phones.filter(p => p.trim() !== '').join(', '),
-                    total_price: activeOffer.current_price,
-                    product_id: PRODUCT_DATA.product.id,
-                    quantity: selectedOfferIndex === 0 ? 1 : 2
-                })
-            });
 
-            if (response.ok) {
-                console.log('Order submitted successfully, preparing WhatsApp redirect...');
-                // Construir mensagem para WhatsApp
-                const phoneList = formData.phones.filter(p => p.trim() !== '').join(', ');
-                const message = `*NOVA ENCOMENDA - ${PRODUCT_DATA.product.name}*\n\n` +
-                    `*Cliente:* ${formData.full_name}\n` +
-                    `*Contacto:* ${phoneList}\n` +
-                    `*Província:* ${formData.province}\n` +
-                    `*Local:* ${formData.delivery_location}\n` +
-                    `*Entrega:* ${formData.delivery_priority}\n\n` +
-                    `*Produto:* ${PRODUCT_DATA.product.name} (${selectedOfferIndex === 0 ? '01 Unidade' : '02 Unidades'})\n` +
-                    `*Total:* ${activeOffer.current_price} Mt\n\n` +
-                    `_Enviado via CHAVA24_`;
+        // Construir mensagem para WhatsApp
+        const phoneList = formData.phones.filter(p => p.trim() !== '').join(', ');
+        const message = `*NOVA ENCOMENDA - ${PRODUCT_DATA.product.name}*\n\n` +
+            `*Cliente:* ${formData.full_name}\n` +
+            `*Contacto:* ${phoneList}\n` +
+            `*Província:* ${formData.province}\n` +
+            `*Local:* ${formData.delivery_location}\n` +
+            `*Entrega:* ${formData.delivery_priority}\n\n` +
+            `*Produto:* ${PRODUCT_DATA.product.name} (${selectedOfferIndex === 0 ? '01 Unidade' : '02 Unidades'})\n` +
+            `*Total:* ${activeOffer.current_price} Mt\n\n` +
+            `_Enviado via CHAVA24_`;
 
-                const encodedMessage = encodeURIComponent(message);
-                const whatsappUrl = `https://wa.me/258872204494?text=${encodedMessage}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/258872204494?text=${encodedMessage}`;
 
-                setIsSuccess(true);
-
-                // Redirecionar
-                window.location.href = whatsappUrl;
-            } else {
-                const errorData = await response.json().catch(() => ({}));
-                console.error('Submission failed:', errorData);
-                alert(`Erro ao enviar pedido: ${errorData.details || 'Tente novamente.'}`);
-            }
-        } catch (error) {
-            console.error('Connection error:', error);
-            alert("Erro de conexão. Verifique sua internet.");
-        } finally {
+        // Pequeno delay para feedback visual do botão "Processando..."
+        setTimeout(() => {
+            setIsSuccess(true);
+            window.location.href = whatsappUrl;
             setIsSubmitting(false);
-        }
+        }, 800);
     };
 
     if (isSuccess) {
