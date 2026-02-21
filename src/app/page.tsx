@@ -22,55 +22,58 @@ export default function LandingPage() {
 
       <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         {/* Hero Section */}
-        <header className="text-center mb-6">
-          <div className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold mb-2">
-            <Star className="fill-yellow-500 border-none" size={14} />
-            <span>{product.rating.value} ({product.rating.count} avaliações)</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black mb-2 tracking-tighter leading-tight uppercase">
-            {product.name}
-          </h1>
-          <p className="text-lg md:text-xl font-bold text-green-600 uppercase tracking-widest mb-4">
-            {product.tagline}
-          </p>
-
-          {/* Main Image Display */}
-          <div className="relative w-full max-w-sm mx-auto overflow-hidden rounded-2xl mb-4 shadow-xl border-2 border-white">
-            <img
-              src="/images/pe6.png"
-              alt={product.name}
-              className="w-full aspect-square object-cover transition-transform duration-700 hover:scale-105"
-            />
-            <div className="absolute top-2 left-2 glass px-3 py-1 rounded-full flex items-center gap-2">
-              <Truck size={14} className="text-green-600" />
-              <span className="text-[10px] font-black uppercase tracking-widest">Pague na Entrega</span>
+        <header className="text-center mb-4">
+          <div className="flex flex-col items-center gap-1 mb-2">
+            <h1 className="text-2xl md:text-4xl font-black tracking-tighter leading-none uppercase">
+              {product.name}
+            </h1>
+            <div className="flex items-center gap-2">
+              <div className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-[10px] font-bold">
+                <Star className="fill-yellow-500 border-none" size={10} />
+                <span>{product.rating.value}</span>
+              </div>
+              <p className="text-xs font-bold text-green-600 uppercase tracking-widest">
+                {product.tagline}
+              </p>
             </div>
           </div>
 
-          <div className="bg-red-50 border border-dashed border-red-500 rounded-2xl p-4 mb-6 shadow-sm">
-            <h3 className="text-red-700 font-bold uppercase tracking-widest text-sm mb-2">PROMOÇÃO LIMITADA</h3>
-            <div className="flex justify-center items-center gap-6">
+          {/* Main Image Display - More compact */}
+          <div className="relative w-full max-w-[280px] mx-auto overflow-hidden rounded-xl mb-3 shadow-lg border border-white">
+            <img
+              src="/images/pe6.png"
+              alt={product.name}
+              className="w-full aspect-square object-cover"
+            />
+            <div className="absolute top-2 left-2 glass px-2 py-0.5 rounded-full flex items-center gap-1">
+              <Truck size={12} className="text-green-600" />
+              <span className="text-[9px] font-black uppercase tracking-widest">Pague na Entrega</span>
+            </div>
+          </div>
+
+          <div className="bg-red-50 border border-dashed border-red-500 rounded-xl p-2 mb-4 shadow-sm max-w-sm mx-auto">
+            <div className="flex justify-center items-center gap-4">
               <div className="flex flex-col items-center">
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Unidade</span>
-                <span className="text-gray-400 line-through font-bold text-xs">4000 Mt</span>
-                <span className="text-xl font-black text-red-600">3699 Mt</span>
+                <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-0.5">1 UNID.</span>
+                <span className="text-gray-400 line-through font-bold text-[10px]">4000 Mt</span>
+                <span className="text-lg font-black text-red-600 leading-none">3699 Mt</span>
               </div>
-              <div className="h-8 w-px bg-red-200" />
+              <div className="h-6 w-px bg-red-200" />
               <div className="flex flex-col items-center">
-                <span className="text-[9px] font-black text-green-600 uppercase tracking-widest leading-none mb-1">Duas Unidades</span>
-                <span className="text-gray-400 line-through font-bold text-xs">8000 Mt</span>
-                <span className="text-xl font-black text-green-600">6500 Mt</span>
+                <span className="text-[8px] font-black text-green-600 uppercase tracking-widest mb-0.5">2 UNID. (COMBO)</span>
+                <span className="text-gray-400 line-through font-bold text-[10px]">8000 Mt</span>
+                <span className="text-lg font-black text-green-600 leading-none">6500 Mt</span>
               </div>
             </div>
           </div>
 
           <a
             href="#checkout"
-            className="w-full md:w-auto inline-flex flex-col items-center gap-1 bg-green-600 text-white px-10 py-4 rounded-xl shadow-xl hover:bg-green-700 transition-all transform hover:-translate-y-1 active:translate-y-0 group"
+            className="w-full max-w-sm inline-flex flex-col items-center gap-0.5 bg-green-600 text-white px-8 py-3 rounded-xl shadow-xl hover:bg-green-700 transition-all transform active:scale-95 group"
           >
-            <span className="text-xl font-black uppercase tracking-tighter">ENCOMENDE AGORA</span>
-            <span className="text-[10px] font-bold opacity-80 uppercase tracking-widest flex items-center gap-2">
-              PAGUE AO RECEBER • SEGURO
+            <span className="text-lg font-black uppercase tracking-tighter">ENCOMENDE AGORA</span>
+            <span className="text-[9px] font-bold opacity-80 uppercase tracking-widest leading-none">
+              PAGA AO RECEBER • ENTREGA GRÁTIS
             </span>
           </a>
         </header>
