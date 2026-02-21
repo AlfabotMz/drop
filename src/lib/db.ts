@@ -3,6 +3,20 @@ import path from 'path';
 
 const DB_PATH = path.resolve(process.cwd(), 'orders.json');
 
+interface Order {
+  id: number;
+  full_name: string;
+  phone: string;
+  province: string;
+  delivery_location: string;
+  delivery_priority: string;
+  total_price: number;
+  product_id: string;
+  quantity: number;
+  status: string;
+  created_at: string;
+}
+
 class JsonDatabase {
   constructor() {
     this.init();
@@ -14,20 +28,20 @@ class JsonDatabase {
     }
   }
 
-  exec(sql) {
+  exec(sql: string) {
     // Basic SQL execution for table creation - ignored as we use JSON structure
     console.log('SQL Exec ignored (JSON fallback):', sql);
   }
 
-  prepare(sql) {
+  prepare(sql: string) {
     const isInsert = sql.toLowerCase().includes('insert into');
     const isSelect = sql.toLowerCase().includes('select');
 
     return {
-      run: (...params) => {
+      run: (...params: any[]) => {
         if (isInsert) {
-          const data = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
-          const newOrder = {
+          const data: Order[] = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+          const newOrder: Order = {
             id: Date.now(),
             full_name: params[0],
             phone: params[1],
@@ -46,7 +60,7 @@ class JsonDatabase {
         }
         return { lastInsertRowid: 0 };
       },
-      all: () => {
+      all: (): Order[] => {
         if (isSelect) {
           return JSON.parse(fs.readFileSync(DB_PATH, 'utf8')).reverse();
         }
