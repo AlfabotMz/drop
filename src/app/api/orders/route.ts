@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import connectDB from '@/lib/mongodb';
+import Order from '@/models/Order';
 
 export async function POST(request: Request) {
   try {
+    await connectDB();
     const body = await request.json();
     const {
       full_name,
@@ -24,12 +26,7 @@ export async function POST(request: Request) {
 
     console.log('Order Body:', body);
 
-    const stmt = db.prepare(`
-      INSERT INTO orders (full_name, phone, province, delivery_location, delivery_priority, total_price, product_id, quantity)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    const result = stmt.run(
+    const newOrder = await Order.create({
       full_name,
       phone,
       province,
@@ -37,14 +34,15 @@ export async function POST(request: Request) {
       delivery_priority,
       total_price,
       product_id,
-      quantity
-    );
+      quantity,
+      status: 'pending'
+    });
 
-    console.log('Order Result:', result);
+    console.log('Order Result:', newOrder);
 
     return NextResponse.json({
       success: true,
-      orderId: result.lastInsertRowid
+      orderId: newOrder._id
     });
   } catch (error) {
     console.error('SERVER Order Submission Error OBJECT:', error);
@@ -60,8 +58,8 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const stmt = db.prepare('SELECT * FROM orders ORDER BY created_at DESC');
-    const orders = stmt.all();
+    await connectDB();
+    const orders = await Order.find().sort({ created_at: -1 });
     return NextResponse.json(orders);
   } catch (error) {
     console.error('Fetch Orders Error:', error);
@@ -71,3 +69,4 @@ export async function GET() {
     );
   }
 }
+

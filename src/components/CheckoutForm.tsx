@@ -51,6 +51,26 @@ export default function CheckoutForm() {
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/258872204494?text=${encodedMessage}`;
 
+        // Enviar para o banco de dados
+        try {
+            await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    full_name: formData.full_name,
+                    phone: phoneList,
+                    province: formData.province,
+                    delivery_location: formData.delivery_location,
+                    delivery_priority: formData.delivery_priority,
+                    total_price: activeOffer.current_price,
+                    product_id: PRODUCT_DATA.product.id,
+                    quantity: selectedOfferIndex === 0 ? 1 : 2
+                })
+            });
+        } catch (error) {
+            console.error('Erro ao salvar pedido:', error);
+        }
+
         // Pequeno delay para feedback visual do botão "Processando..."
         setTimeout(() => {
             setIsSuccess(true);
@@ -58,6 +78,7 @@ export default function CheckoutForm() {
             setIsSubmitting(false);
         }, 800);
     };
+
 
     if (isSuccess) {
         return (
