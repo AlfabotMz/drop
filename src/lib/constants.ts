@@ -9,20 +9,20 @@ export const PRODUCT_DATA = {
     top_alerts: {
         type: "repeating_banner",
         content: {
-            headline: "⚠️ PROMOÇÃO VÁLIDA PARA AS PRÓXIMAS 6 UNIDADES",
+            headline: "⚠️ PROMOÇÃO VÁLIDA PARA AS PRÓXIMAS 10 UNIDADES",
             subheadline: "ECONOMIZE HOJE COM A CHAVA24 - PAGUE AO RECEBER"
         }
     },
     product: {
-        id: "panela-electrica-4l",
-        name: "Panela Eléctrica",
-        tagline: "A Revolução na Sua Cozinha",
+        id: "mini-liquidificador-portatil",
+        name: "Mini Liquidificador Portátil",
+        tagline: "Praticidade, Saúde e Economia no seu dia a dia",
         rating: {
-            value: 4.9,
-            count: 512
+            value: 4.8,
+            count: 245
         },
         stock: {
-            remaining_units: 6,
+            remaining_units: 10,
             low_stock_warning: true
         },
         price: {
@@ -30,34 +30,35 @@ export const PRODUCT_DATA = {
             offers: [
                 {
                     label: "01 Unidade",
-                    old_price: 4000,
-                    current_price: 3699,
-                    icon: "pe6.png"
+                    old_price: 1200,
+                    current_price: 1200,
+                    icon: "p01.jpg"
                 },
                 {
                     label: "02 Unidades (Combo)",
-                    old_price: 8000,
-                    current_price: 6500,
-                    savings: 1500,
-                    icon: "pe4.avif"
+                    old_price: 2400,
+                    current_price: 2000,
+                    savings: 0,
+                    icon: "p02.jpg"
                 }
             ]
         }
     },
     features: [
-        "7 funções em 1: Arroz, Vapor, Sopas, Guisados, Fritura, Reaquecimento e Manter Aquecido",
-        "Potência de até 1300W para aquecimento rápido",
-        "Capacidade de 4 Litros",
-        "Revestimento antiaderente de alta qualidade",
-        "Certificação CE e proteção térmica"
+        "Bateria Recarregável via USB - Use em qualquer lugar",
+        "Lâminas em Aço Inoxidável potentes para triturar frutas e gelo",
+        "Capacidade ideal de 350ml para doses individuais",
+        "Preparo Rápido: seu batido pronto em cerca de 30 segundos",
+        "Fácil de Limpar: adicione água e detergente e ligue por segundos",
+        "100% Portátil: cabe perfeitamente na sua mochila ou bolsa"
     ],
     specs: {
-        marca: "Saintciaga",
-        modelo: "4L Multi-cooker",
-        tensao: "220V",
-        potencia: "1100W – 1300W",
-        material: "Plástico resistente + fundo metálico composto",
-        controle: "Painel digital no cabo"
+        capacidade: "350ml",
+        carregamento: "USB (Cabo incluso)",
+        material: "Plástico resistente (BPA Free) + Aço Inox",
+        uso: "Individual e Portátil",
+        alimentação: "Bateria interna recarregável",
+        segurança: "Sistema de trava de encaixe para funcionamento"
     }
 };
 

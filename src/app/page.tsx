@@ -12,7 +12,7 @@ export default function LandingPage() {
   const bestOffer = product.price.offers[1];
 
   return (
-    <main className="min-h-screen bg-white font-sans text-gray-900 selection:bg-green-100">
+    <main className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100">
       {/* Repeating Banner */}
       <div className="bg-red-700 text-white py-2 overflow-hidden whitespace-nowrap sticky top-0 z-40 shadow-md">
         <div className="inline-block animate-marquee uppercase font-black text-sm tracking-widest">
@@ -20,11 +20,11 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
+      <div className="max-w-4xl mx-auto px-4 py-4 md:py-8">
         {/* Hero Section */}
-        <header className="text-center mb-4">
-          <div className="flex flex-col items-center gap-1 mb-2">
-            <h1 className="text-2xl md:text-4xl font-black tracking-tighter leading-none uppercase">
+        <header className="text-center mb-2">
+          <div className="flex flex-col items-center gap-1 mb-1">
+            <h1 className="text-xl md:text-3xl font-black tracking-tighter leading-none uppercase">
               {product.name}
             </h1>
             <div className="flex items-center gap-2">
@@ -32,69 +32,72 @@ export default function LandingPage() {
                 <Star className="fill-yellow-500 border-none" size={10} />
                 <span>{product.rating.value}</span>
               </div>
-              <p className="text-xs font-bold text-green-600 uppercase tracking-widest">
+              <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
                 {product.tagline}
               </p>
             </div>
           </div>
 
-          {/* Main Image Display - More compact */}
-          <div className="relative w-full max-w-[280px] mx-auto overflow-hidden rounded-xl mb-3 shadow-lg border border-white">
-            <img
-              src="/images/pe6.png"
-              alt={product.name}
-              className="w-full aspect-square object-cover"
+          {/* Main Video Display - Optimized for Fold */}
+          <div className="relative w-full max-w-[260px] mx-auto overflow-hidden rounded-2xl mb-3 shadow-2xl border-2 border-white bg-gray-100">
+            <video
+              src="/videos/video.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-auto object-cover"
+              poster="/images/p01.jpg"
             />
-            <div className="absolute top-2 left-2 glass px-2 py-0.5 rounded-full flex items-center gap-1">
-              <Truck size={12} className="text-green-600" />
-              <span className="text-[9px] font-black uppercase tracking-widest">Pague na Entrega</span>
+            <div className="absolute top-2 left-2 glass px-2 py-0.5 rounded-full flex items-center gap-1 z-10">
+              <Truck size={12} className="text-blue-600" />
+              <span className="text-[9px] font-black uppercase tracking-widest text-gray-700">Pague na Entrega</span>
             </div>
           </div>
 
-          <div className="bg-red-50 border border-dashed border-red-500 rounded-xl p-2 mb-4 shadow-sm max-w-sm mx-auto">
+          <div className="bg-blue-50 border border-dashed border-blue-500 rounded-xl p-2 mb-3 shadow-sm max-w-sm mx-auto">
             <div className="flex justify-center items-center gap-4">
               <div className="flex flex-col items-center">
                 <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-0.5">1 UNID.</span>
-                <span className="text-gray-400 line-through font-bold text-[10px]">4000 Mt</span>
-                <span className="text-lg font-black text-red-600 leading-none">3699 Mt</span>
+                {/* <span className="text-gray-400 line-through font-bold text-[10px]">2000 Mt</span> */}
+                <span className="text-lg font-black text-red-600 leading-none">1200 Mt</span>
               </div>
-              <div className="h-6 w-px bg-red-200" />
+              <div className="h-6 w-px bg-blue-200" />
               <div className="flex flex-col items-center">
-                <span className="text-[8px] font-black text-green-600 uppercase tracking-widest mb-0.5">2 UNID. (COMBO)</span>
-                <span className="text-gray-400 line-through font-bold text-[10px]">8000 Mt</span>
-                <span className="text-lg font-black text-green-600 leading-none">6500 Mt</span>
+                <span className="text-[8px] font-black text-blue-600 uppercase tracking-widest mb-0.5">2 UNID. (COMBO)</span>
+                {/* <span className="text-gray-400 line-through font-bold text-[10px]">4000 Mt</span> */}
+                <span className="text-lg font-black text-blue-600 leading-none">2000 Mt</span>
               </div>
             </div>
           </div>
 
           <a
             href="#checkout"
-            className="w-full max-w-sm inline-flex flex-col items-center gap-0.5 bg-green-600 text-white px-8 py-3 rounded-xl shadow-xl hover:bg-green-700 transition-all transform active:scale-95 group"
+            className="w-full max-w-sm inline-flex flex-col items-center gap-0.5 bg-green-600 text-white px-8 py-2 rounded-xl shadow-xl hover:bg-green-700 transition-all transform active:scale-95 group"
           >
             <span className="text-lg font-black uppercase tracking-tighter">ENCOMENDE AGORA</span>
             <span className="text-[9px] font-bold opacity-80 uppercase tracking-widest leading-none">
-              PAGA AO RECEBER • ENTREGA GRÁTIS
+              PAGA AO RECEBER • ENTREGA EM MAPUTO
             </span>
           </a>
         </header>
 
         {/* Value Prop */}
-        <section className="bg-green-50 rounded-[2.5rem] p-8 md:p-12 mb-16 border-2 border-green-100">
+        <section className="bg-blue-50 rounded-[2.5rem] p-8 md:p-12 mb-16 border-2 border-blue-100">
           <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight uppercase leading-none text-center">
-            Cozinhe Tudo em Um Só Lugar
+            O Que Você Pode Preparar
           </h2>
           <p className="text-lg md:text-xl text-gray-700 mb-8 font-medium leading-relaxed text-center">
-            Cansado de sujar várias panelas para uma única refeição? A Panela Elétrica frita, cozinha, grelha e prepara sopas com rapidez e praticidade.
+            Prepare seus sumos, batidos e shakes em qualquer lugar, em apenas alguns segundos. Compacto, moderno e fácil de usar.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { icon: Zap, label: "AQUECIMENTO RÁPIDO" },
-              { icon: Package, label: "4L CAPACIDADE" },
-              { icon: ShieldCheck, label: "ANTIADERENTE PREMIUM" }
+              "Sumos naturais", "Batidos de frutas", "Vitaminas",
+              "Shakes proteicos", "Misturas energéticas", "Capacidade 350ml"
             ].map((item, i) => (
-              <div key={i} className="flex flex-col items-center p-4 bg-white rounded-2xl shadow-sm border border-green-200">
-                <item.icon className="text-green-600 mb-2" size={32} />
-                <span className="font-black text-xs uppercase tracking-widest text-center">{item.label}</span>
+              <div key={i} className="flex flex-col items-center p-4 bg-white rounded-2xl shadow-sm border border-blue-200">
+                <CheckCircle2 className="text-blue-600 mb-2" size={24} />
+                <span className="font-black text-[10px] md:text-xs uppercase tracking-widest text-center text-gray-700">{item}</span>
               </div>
             ))}
           </div>
@@ -103,22 +106,22 @@ export default function LandingPage() {
         {/* Product Images (Secondary) */}
         <section className="mb-16">
           <div className="grid grid-cols-2 gap-4">
-            <img src="/images/pe1.webp" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
-            <img src="/images/pe2.webp" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
-            <img src="/images/pe5.png" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
-            <img src="/images/pe4.avif" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
+            <img src="/images/p01.jpg" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
+            <img src="/images/p02.jpg" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
+            <img src="/images/p03.jpg" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
+            <img src="/images/p04.jpg" className="rounded-2xl border-2 border-white shadow-lg aspect-square object-cover" />
           </div>
         </section>
 
         {/* Features */}
         <section className="mb-16">
           <h3 className="text-2xl font-black mb-8 uppercase tracking-widest border-b-4 border-yellow-400 inline-block">
-            Por que Você Precisa Desta Panela?
+            Benefícios Reais
           </h3>
           <ul className="space-y-4">
             {features.map((feature, i) => (
               <li key={i} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200">
-                <CheckCircle2 className="text-green-600 mt-1 shrink-0" size={24} />
+                <CheckCircle2 className="text-blue-600 mt-1 shrink-0" size={24} />
                 <span className="text-lg font-bold text-gray-700">{feature}</span>
               </li>
             ))}
@@ -135,14 +138,14 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div className="bg-white p-6 rounded-3xl shadow-md border-2 border-red-100">
               <p className="font-black text-gray-400 uppercase text-[10px] tracking-widest mb-2">Uma Unidade</p>
-              <p className="text-gray-400 line-through text-lg font-bold">4000 MZN</p>
-              <p className="text-4xl font-black text-red-600 tracking-tighter">3699 Mt</p>
+              {/* <p className="text-gray-400 line-through text-lg font-bold">2000 MZN</p> */}
+              <p className="text-4xl font-black text-red-600 tracking-tighter">1200 Mt</p>
             </div>
-            <div className="bg-white p-6 rounded-3xl shadow-md border-4 border-green-500 scale-105">
-              <p className="font-black text-green-600 uppercase text-[10px] tracking-widest mb-2">Combo (Duas Unidades)</p>
-              <p className="text-gray-400 line-through text-lg font-bold">8000 MZN</p>
-              <p className="text-4xl font-black text-green-600 tracking-tighter">6500 Mt</p>
-              <span className="inline-block mt-2 bg-green-100 text-green-800 text-[10px] font-black px-2 py-1 rounded-full uppercase">Economize 1500 Mt</span>
+            <div className="bg-white p-6 rounded-3xl shadow-md border-4 border-blue-500 scale-105">
+              <p className="font-black text-blue-600 uppercase text-[10px] tracking-widest mb-2">Combo (Duas Unidades)</p>
+              {/* <p className="text-gray-400 line-through text-lg font-bold">4000 MZN</p> */}
+              <p className="text-4xl font-black text-blue-600 tracking-tighter">2000 Mt</p>
+              {/* <span className="inline-block mt-2 bg-blue-100 text-blue-800 text-[10px] font-black px-2 py-1 rounded-full uppercase">Economize 1800 Mt</span> */}
             </div>
           </div>
 
